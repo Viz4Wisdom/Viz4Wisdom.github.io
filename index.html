@@ -1,1 +1,171 @@
-Hello world!
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/d3-color.v1.min.js"></script>
+  <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="style.css"></style>
+</head>
+
+<body>
+  <script>
+    // Helper functions
+    function set_svg_size(svg_elem, c_width, c_height) {
+      // Takes sizes as an input, and returns the two sizes
+      // that optimizes a 19:9 ratio
+      adapted_w = c_height * 16 / 9
+      adapted_h = c_width * 9 / 16
+
+      console.log(c_width, c_height, adapted_h, adapted_w)
+
+      if (adapted_h > c_height) {
+        svg_elem
+            .attr("width", adapted_w)
+            .attr("height", c_height)
+      } else {
+        svg_elem
+            .attr("width", c_width)
+            .attr("height", adapted_h)
+      }
+    }
+    
+    function add_geolocation_to_packet_json(p_iter, ip_iter) {
+
+      nb_packets = p_iter.length
+      current_prog = 0
+      
+      p_iter.forEach(function (packet, i) {
+
+        ip_iter.forEach(function(ip_refs) {
+          if (ip_refs.ip == packet.Sender) {
+            packet.sender_coordinates = [+ip_refs.longitude, +ip_refs.latitude]
+          } else if (ip_refs.ip == packet.Receiver) {
+            packet.receiver_coordinates = [+ip_refs.longitude, +ip_refs.latitude]
+          }
+        })
+        
+        // Plotting the data binding progess
+        if((10 * i / nb_packets) > current_prog ) {
+          console.log(10*current_prog + " - " + (10 * ++current_prog) + "%") 
+        }
+      
+
+      })
+    }
+
+    function arc_generator(x1, y1, x2, y2, radius) {
+
+      x_m = (x1 + x2) / 2
+      y_m = (y1 + y2) / 2
+
+      dxy = Math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+
+      x_r = x_m - (x2 - x1)/dxy * radius
+      y_r = y_m - (y2 - y1)/dxy * radius
+
+      alpha = Math.asin((y2-y1)/dxy)
+      beta = Math.atan(dxy/2/radius)
+
+      arc = d3.arc()
+        .outerRadius(radius + 0.1)
+        .innerRadius(radius)
+        .startAngle(alpha + beta)
+        .endAngle(alpha - beta)
+
+    }
+
+    // ****************************
+    // * Constants initialization *
+    // ****************************
+    var client_w = document.documentElement.clientWidth,
+        client_h = document.documentElement.clientHeight,
+        map_w = client_w, map_h = client_h;
+
+
+    // Creating the canvas
+		var global_cont = d3.select( "body" )
+        .append("div")
+        .attr("id", "global_container")
+  	
+    var svg = global_cont.append( "svg" )
+
+    set_svg_size(svg, map_w, map_h)
+
+    var projection = d3.geoNaturalEarth1()
+        .center([2.454071, 46.279229]) // Centering on France
+        .scale(200);
+
+    var path = d3.geoPath() // d3.geo.path avec d3 version 3
+         .projection(projection);
+
+  d3.json("world_topography_50.json", function(geojson_elem) {
+      svg.selectAll("path")
+        .data(geojson_elem.features)
+        .enter()
+        .append("path")
+        .attr("d", path)
+    })
+
+    // Creating the tooltip object
+    var tooltip = global_cont.append('div')
+      .attr('class', 'hidden tooltip');
+
+
+    // *********************
+    // * Readers functions *
+    // *********************
+
+    // Opening the packets json
+    d3.json("packets_data.json", function(packets_iterator) {
+      
+      // Opening the IPs json
+      d3.json("ip_reference_data.json", function(ips_iterator) {
+
+        add_geolocation_to_packet_json(packets_iterator, ips_iterator)
+
+        svg.append("g").selectAll("line")
+          .data(packets_iterator)
+          .enter()
+          .append("line")
+          .attr("path", path)
+          .attr("x1", function(d) { 
+            if (d.sender_coordinates == undefined) {
+              return -20
+            } else {
+              return projection(d.sender_coordinates)[0]
+            }
+          })
+          .attr("y1",  function(d) { 
+            if (d.sender_coordinates == undefined) {
+              return -20
+            } else {
+              return projection(d.sender_coordinates)[1]
+            }
+          })
+          .attr("x2", function(d) { 
+            if (d.receiver_coordinates == undefined) {
+              return -20
+            } else {
+              return projection(d.receiver_coordinates)[0]
+            }
+          })
+          .attr("y2",  function(d) { 
+            if (d.receiver_coordinates == undefined) {
+              return -20
+            } else {
+              return projection(d.receiver_coordinates)[1]
+            }
+          })
+          .attr("stroke", "rgba(0, 153, 204, 0.2)")
+
+      }) // Closing the IPs json
+
+    }) // Closing the packets json
+
+
+  </script>
+
+</body>
+
