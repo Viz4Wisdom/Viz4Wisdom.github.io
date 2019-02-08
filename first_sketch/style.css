@@ -1,5 +1,11 @@
 path {
-	fill: white;
+	fill: none;
 	stroke: black;
 	stroke-width: 0.3px;
+}
+
+.stream {
+	fill: none;
+	stroke: rgba(0, 153, 204, 0.1);
+	stroke-width: 0.15px;
 }
