@@ -1,11 +1,36 @@
 path {
 	fill: none;
 	stroke: black;
-	stroke-width: 0.3px;
+	stroke-width: 0.2px;
 }
 
 .stream {
 	fill: none;
 	stroke: rgba(0, 153, 204, 0.1);
 	stroke-width: 0.15px;
+}
+
+.hidden_stream {
+	display: none
+}
+
+
+.hidden {
+    display: none;
+}
+
+div.tooltip {
+    color: #222;
+    background-color: #fff;
+    padding: .5em;
+    text-shadow: #f5f5f5 0 1px 0;
+    border-radius: 2px;
+    opacity: 0.9;
+    position: absolute;
+}
+
+#sliding_window {
+    fill: rgba(225, 225, 225, 0.2);
+    stroke: rgba(125, 125, 125, 0.5);
+    border-radius: 2px;
 }
