@@ -60,10 +60,12 @@
           country = rec.country
           town = rec.city
           p_mode = "sender"
+          p_domain = rec.domain
         } else if (packet_ref.Receiver == host_ip) {
           country = send.country
           town = send.city
           p_mode="receiver"
+          p_domain = send.domain
         }
 
         points[1] = {x: (points[0].x + points[2].x) / 2, y: (points[0].y + points[2].y) / 2 - Math.abs(points[0].x - points[2].x)/6}
@@ -72,6 +74,7 @@
         packet_ref.country = country
         packet_ref.city = town
         packet_ref.mode = p_mode
+        packet_ref.domain = p_domain 
       }
     }
     
@@ -171,7 +174,7 @@
                 .attr('style', 'left:' + (0 + mouse[0] + 15) +
                         'px; top:' + (0 + mouse[1]- 50) + 'px')
                 .html(time_formatter(new Date(d.Time)) + "<br />Country: " + d.country + "<br />City: " + d.city + "<br />Length: " + d.Length + " bytes" + 
-                          "<br />Company: " + d.BusinessName);
+                          "<br />Domain: " + d.domain);
 
             })
           .on('mouseout', function() {
@@ -296,7 +299,7 @@
               .attr('style', 'left:' + (mouse[0] + 15) +
                       'px; top:' + (mouse[1]- 50) + 'px')
                 .html(time_formatter(new Date(d.Time)) + "<br />Country: " + d.country + "<br />City: " + d.city + "<br />Length: " + d.Length + " bytes" +
-                                  "<br />Company: " + d.BusinessName);
+                                  "<br />Domain: " + d.domain);
           })
         .on('mouseout', function() {
             tooltip.classed('hidden', true);
