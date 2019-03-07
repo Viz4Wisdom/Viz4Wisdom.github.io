@@ -8,7 +8,7 @@ import requests
 
 LOCAL_IPV4 = 'Your local IPV4'
 LOCAL_IPV6 = 'Your local IPV6'
-delta = dt.timedelta(seconds=1)
+delta = dt.timedelta(seconds=60)
 
 def format_packet(row, session):
     time = dt.datetime.fromisoformat(row['Time'])
@@ -75,7 +75,7 @@ def format_packets(file, session):
     for p in formatted_packets:
         p['Time'] = p['Time'].isoformat()
 
-    return formatted_packets
+    return formatted_packets[2:]
     
 
 
@@ -155,7 +155,8 @@ if __name__ == "__main__":
     
     packets_files = [
         {'file': 'packets/leisure.csv', 'session': 'leisure'},
-        {'file': 'packets/work.csv', 'session': 'work'}
+        {'file': 'packets/work.csv', 'session': 'work'},
+        {'file': 'packets/administrative.csv', 'session': 'administrative'}
     ]
 
 
@@ -184,10 +185,5 @@ if __name__ == "__main__":
     print('Getting IP location and domain...')
     with open('ips_from_packets.json', 'w') as outfile:
         json.dump(get_location_for_packets('packets_data.json', 'hostnames_from_history.json'), outfile, indent=4)
-
-
-
-
-
 
 
