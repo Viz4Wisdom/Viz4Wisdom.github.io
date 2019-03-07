@@ -83,7 +83,7 @@
       
       p_iter.forEach(function (packet, i) {
 
-        if (new Date(packet.Time) > time_scale.domain()[1])  time_scale.domain([time_scale.domain[0], new Date(packet.Time)])
+        if (new Date(packet.Time) > time_scale.domain()[1])  time_scale.domain([time_scale.domain()[0], new Date(packet.Time)])
         define_points(packet, ip_data, i)
         
         // Plotting the data binding progess
@@ -237,7 +237,7 @@
 
       time_formatter = d3.timeFormat("%Y %b, %e - %H:%M:%S")
       color_scale = d3.scaleOrdinal(d3.schemeCategory10)
-
+      console.log(time_scale.domain(), time_scale(new Date(2019, 2, 6, 23, 0, 0, 0)))
       elem.selectAll(".packet").remove()
 
       elem.selectAll("rect")
@@ -249,7 +249,7 @@
                           return "packet"; 
                         else return "packet hidden"
                   })
-        .attr("x", d => time_scale(new Date(d.Time)))
+        .attr("x", d => time_scale(new Date(d.Time)) )
         .attr("y", function(d) 
                   {
                     if (d.mode == "sender") {
