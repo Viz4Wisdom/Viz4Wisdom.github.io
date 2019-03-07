@@ -170,7 +170,8 @@
             streams_tooltip.classed('hidden', false)
                 .attr('style', 'left:' + (0 + mouse[0] + 15) +
                         'px; top:' + (0 + mouse[1]- 50) + 'px')
-                .html(time_formatter(new Date(d.Time)) + "<br />Country: " + d.country + "<br />City: " + d.city + "<br />Length: " + d.Length + " bytes");
+                .html(time_formatter(new Date(d.Time)) + "<br />Country: " + d.country + "<br />City: " + d.city + "<br />Length: " + d.Length + " bytes" + 
+                          "<br />Company: " + d.BusinessName);
 
             })
           .on('mouseout', function() {
@@ -294,7 +295,8 @@
           tooltip.classed('hidden', false)
               .attr('style', 'left:' + (mouse[0] + 15) +
                       'px; top:' + (mouse[1]- 50) + 'px')
-                .html(time_formatter(new Date(d.Time)) + "<br />Country: " + d.country + "<br />City: " + d.city + "<br />Length: " + d.Length + " bytes");
+                .html(time_formatter(new Date(d.Time)) + "<br />Country: " + d.country + "<br />City: " + d.city + "<br />Length: " + d.Length + " bytes" +
+                                  "<br />Company: " + d.BusinessName);
           })
         .on('mouseout', function() {
             tooltip.classed('hidden', true);
