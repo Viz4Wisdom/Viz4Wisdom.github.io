@@ -1,43 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Viz</title>
-  
-  <script src="https://d3js.org/d3.v4.min.js"></script>
-  <script src="https://d3js.org/d3-color.v1.min.js"></script>
-  <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
-  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-  <script src="https://unpkg.com/d3fc/build/d3fc.min.js"></script>
 
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Molle:400i" rel="stylesheet">
+<head>
+	<title>Viz</title>
+
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://d3js.org/d3-color.v1.min.js"></script>
+	<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+	<script src="https://unpkg.com/d3fc/build/d3fc.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Molle:400i" rel="stylesheet">
 </head>
 
 <body>
-  <nav id="menu">
-			<ul>
-				<div id="divlogo">
+	<nav id="menu">
+		<ul>
+			<div id="divlogo">
 				<a id="logo" href=index.html>Data4Wisdom</a>
-				</div>
-				<li>
-					<div>
+			</div>
+			<li>
+				<div>
 					<a href=index.html>Home</a>
-					</div>
-				</li>
-				<li>
-					<a href=#>Visu</a>
-				</li>
-				<li>
-					<div>
+				</div>
+			</li>
+			<li>
+				<a href=#>Visu</a>
+			</li>
+			<li>
+				<div>
 					<a href="about.html">About us</a>
-					</div>
-				</li>
-			</ul>
-  </nav>
-  <main id="main_viz">	
-	  <script src="script.js"></script>
-	  <div id="description">Blablablabla </div>
-  </main>	  
+				</div>
+			</li>
+		</ul>
+	</nav>
+	<main id="main_viz">
+		<script src="script.js"></script>
+		<div id="description">
+			<p>
+
+			</p>
+			
+			<h3>Mode</h3>
+			<div class="container">
+				<div class="radio">
+					<input id="r1" type="radio" name="mode" onclick="updateMode()" value="session" checked>
+					<label for="r1">Session</label>
+				</div>
+				<div class="radio">
+					<input id="r2" type="radio" name="mode" onclick="updateMode()" value="up_down">
+					<label for="r2">Up and Down</label>
+				</div>
+			</div>
+			<h3>Sessions</h3>
+			<div class="container">
+				<div class="checkbox">
+					<input id="c1" type="checkbox" name="session" onclick="updateSessions()" value="work" checked>
+					<label for="c1">Work</label>
+				</div>
+				<div class="checkbox">
+					<input id="c2" type="checkbox" name="session" onclick="updateSessions()" value="leisure" checked>
+					<label for="c2">Leisure</label>
+				</div>
+				<div class="checkbox">
+					<input id="c3" type="checkbox" name="session" onclick="updateSessions()" value="administrative" checked>
+					<label for="c3">Administrative</label>
+				</div>
+			</div>
+		</div>
+		
+	</main>
 
 </body>
