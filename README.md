@@ -19,3 +19,14 @@ The design sheets can be found at the root of the project under the name `Viz4Wi
 In the end, we decided to devide or analysis in three sessions : work, leisure, administrative. During each of them, we browsed only on websites that are related to the session. For instance, during the leisure session, we used platforms such as Youtube, Netflix, Facebook, Twitter, Reddit... The administrative session was focused on French administrative platforms for ministries, healthcare, political parties, energy suppliers. The work session is based on a software engineering student activity whois working on a website project visiting websites such as stackoverflow, language documentations, cloud platforms or overleaf.
 
 To reduce the amount of data displayed and improve the performance, we decided to aggregate the packets every 60 seconds.
+
+
+# Snapshots
+
+Global Map :
+![img](integration/images/visu.png)
+
+
+Focus on France :
+![img](integration/images/visu_zoom.png)
+
