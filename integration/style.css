@@ -112,9 +112,14 @@ div.tooltip {
     border-radius: 2px;
 }
 
-#global_container {
+
+main div {
 	margin: 1em 0em;
 	padding: 0.5em;
+	border : 4px solid black;
+}
+
+#global_container {
 	background-color : white;
 	border : 4px solid black;
 	display: block;
