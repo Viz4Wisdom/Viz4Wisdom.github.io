@@ -339,6 +339,8 @@ function updateSessions(){
 		}
 	})
 	console.log(sessions)
+	drawStreams(svg, packets_iterator_global, path, base_beta, line_obj, gaussian_generator, mode, sessions, time_scale)
+
 }
 
 function updateMode(){
@@ -349,6 +351,7 @@ function updateMode(){
 		}
 	})
 	console.log("Mode = " + mode)
+	drawStreams(svg, packets_iterator_global, path, base_beta, line_obj, gaussian_generator, mode, sessions, time_scale)
 }
 
 // ****************************
@@ -392,6 +395,10 @@ var projection = d3.geoNaturalEarth1()
 var path = d3.geoPath() // d3.geo.path avec d3 version 3
 	.projection(projection);
 
+var packets_iterator_global;
+var base_beta = 0.5;
+var line_obj;
+
 d3.json("world_topography_50.json", function (geojson_elem) {
 	svg.selectAll("path").append("g")
 		.data(geojson_elem.features)
@@ -400,12 +407,12 @@ d3.json("world_topography_50.json", function (geojson_elem) {
 		.attr("d", d => path(d))
 	var curve_obj = d3.curveBundle.beta(0.5)
 
-	var line_obj = d3.line()
+	line_obj = d3.line()
 		.x(d => d.x)
 		.y(d => d.y)
 		.curve(d3.curveBundle.beta(0.5))
 
-	var base_beta = 0.5;
+	
 
 	var sessions = ["work", "administrative", "leisure"]
 
@@ -427,9 +434,10 @@ d3.json("world_topography_50.json", function (geojson_elem) {
 	// *********************
 	// * Readers functions *
 	// *********************
-
+	
 	// Opening the packets json
 	d3.json("packets_data.json", function (packets_iterator) {
+		packets_iterator_global = packets_iterator
 
 		// Opening the IPs json
 		d3.json("ip_reference_data.json", function (ips_data) {
