@@ -114,8 +114,12 @@ div.tooltip {
 
 #global_container {
 	margin: 1em 0em;
-	padding: 1em;
+	padding: 0.5em;
 	background-color : white;
 	border : 4px solid black;
-	display: flex;
+	display: block;
+}
+
+main{
+	display:flex;
 }
