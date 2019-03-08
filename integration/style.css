@@ -11,8 +11,8 @@ body {
 
 .photo{
 	border-radius:50%;
-	width: 10%;
-	height: 10%;
+	width: 10em;
+	height: 10em;
 
 }
 
@@ -135,4 +135,5 @@ div.tooltip {
 
 #presentations_container {
 	display: flex;
+	justify-content : space-around;
 }
