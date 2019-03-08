@@ -132,3 +132,7 @@ div.tooltip {
 #global_container svg {
 	display: block;
 }
+
+#presentations_container {
+	display: flex;
+}
