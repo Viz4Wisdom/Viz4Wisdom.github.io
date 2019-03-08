@@ -153,3 +153,10 @@ div.tooltip {
 	display:block;
 	text-align:center;
 }
+
+.logo_email{
+	display: block;
+	width:4em;
+	margin-left:auto;
+	margin-right:auto;
+}
