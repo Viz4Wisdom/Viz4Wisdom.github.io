@@ -3,6 +3,10 @@ var fixed_sessions = ["leisure", "work", "administrative"];
 var sessions = ["leisure", "work", "administrative"];
 var sl_begin_x = 0, sl_begin_y =0;
 
+var zoom_bh = d3.zoom()
+.scaleExtent([1, 16])
+.on("zoom", zoomed)
+
 // Helper functions
 function set_svg_size(svg_elem, c_width, c_height) {
 	// Takes sizes as an input, and returns the two sizes
@@ -149,6 +153,8 @@ function drawStreams(elem, it_packets, path_obj, base_beta, line_obj, gaussian_g
 	test = elem.select("#streams")
 	test.remove()
 
+	zoom_bh.transform(elem, d3.zoomIdentity)
+
 	g = elem.append("g").attr("id", "streams")
 
 	g.selectAll("path")
@@ -258,7 +264,6 @@ function plot_slider_bars(elem, packets, mode, sessions, time_scale, values_up_s
 
 	time_formatter = d3.timeFormat("%Y %b, %e - %H:%M:%S")
 	color_scale = d3.scaleOrdinal(d3.schemeCategory10)
-	
 	elem.selectAll(".packet").remove()
 
 	elem.selectAll("rect")
@@ -426,9 +431,7 @@ d3.json("world_topography_50.json", function (geojson_elem) {
 
 	mode = "session" // ou "up_down"
 
-	zoom_bh = d3.zoom()
-		.scaleExtent([1, 16])
-		.on("zoom", zoomed)
+
 
 	rect_x = 0, rect_y = 0;
 
