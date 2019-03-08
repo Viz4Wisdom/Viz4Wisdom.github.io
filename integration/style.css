@@ -141,6 +141,7 @@ div.tooltip {
 
 #global_container svg {
 	display: block;
+	margin:auto;
 }
 
 #presentations_container {
