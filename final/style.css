@@ -34,3 +34,9 @@ div.tooltip {
     stroke: rgba(125, 125, 125, 0.5);
     border-radius: 2px;
 }
+
+#geo_window {
+    fill: rgba(225, 225, 225, 0.2);
+    stroke: rgba(125, 125, 125, 0.5);
+    border-radius: 2px;
+}

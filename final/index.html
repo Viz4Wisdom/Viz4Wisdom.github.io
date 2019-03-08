@@ -119,8 +119,42 @@
 
     }
 
-    function drawing_box() {
-      console.log("Drawing box function to do")
+    function drawing_box_init(svg_elem) {
+
+      if (mouse_mode == "draw_box")
+      {
+        
+        d3.select("#geo_window").remove()
+
+        rect_x = d3.event.x
+        rect_y = d3.event.y
+
+        console.log(svg_elem)
+
+        svg_elem.selectAll("rect").append("rect")
+          .attr("id", "geo_window")
+          .attr("x", rect_x)
+          .attr("y", rect_y)
+          .attr("width", 0)
+          .attr("height", 0)
+
+        console.log(rect_x, rect_y)
+      }
+    }
+
+    function drawing_box_drag() {
+      if (mouse_mode == "draw_box")
+      {
+        width = d3.event.x - rect_x
+        height = d3.event.y - rect_y
+
+        d3.select("#geo_window")
+          .attr("width", width)
+          .attr("height", height)
+
+        console.log(width, height)
+      }
+
     }
 
     function drawStreams(elem, it_packets, path_obj, base_beta, line_obj, gaussian_generator, mode, sessions, time_scale) {      // Creating the tooltip object
@@ -306,7 +340,6 @@
         });
 
     }
-
     
     function gaussian_generator() {
       u1 = Math.random()
@@ -337,6 +370,8 @@
 
     var slider = global_cont.append("svg").attr("id", "slider")
 
+    var slider_zoomed = global_cont.append("svg").attr("id", "slider_zoomed")
+
 
     //new_dims = set_svg_size(svg, map_w, map_h)
     svg.attr("width", 1000).attr("height", 500)
@@ -345,6 +380,8 @@
     var slider_height = 180
     
     slider.attr("width", new_dims['width'])
+      .attr("height", slider_height)
+    slider_zoomed.attr("width", new_dims['width'])
       .attr("height", slider_height)
 
     // TODO : Prévoir un scaling dépendendant de la taille de la fenêtre pour l'initialisation
@@ -379,7 +416,13 @@
     
     slider_elements = plot_slider_init(slider, 0, new_dims['height'], new_dims['width'], slider_height, min_t, max_t)
 
-    mode = "session"
+    mode = "session" // ou "up_down"
+
+    zoom_bh = d3.zoom()
+          .scaleExtent([1, 16])
+          .on("zoom", zoomed)
+    
+    rect_x = 0, rect_y = 0;
 
     // *********************
     // * Readers functions *
@@ -487,18 +530,13 @@
           .attr("width", 10)
           
         drawStreams(svg, packets_iterator, path, base_beta, line_obj, gaussian_generator, mode, sessions, time_scale)
-      
-        svg.call(d3.zoom()
-          .scaleExtent([1, 16])
-          .on("zoom", zoomed));
+        
+        svg.call(zoom_bh);
 
       
 
         
         ended = function() { console.log("test") ; drawStreams(svg, packets_iterator, path, base_beta, line_obj, gaussian_generator, mode, sessions, time_scale)}
-
-        slider_elements.sliding_window.attr("draggable", true)
-        document.addEventListener("dragend", e => {e.preventDefault(); console.log("test")})
 
         slider_elements.sliding_window.call( d3.drag()
           .on("drag", d => update_sw_pos(slider_elements.sliding_window, left_handle, right_handle, slider_elements.time_scale)))
@@ -507,7 +545,8 @@
           .on("drag", d => resize_sw_left(slider_elements.sliding_window, left_handle, right_handle, slider_elements.time_scale)))
         right_handle.call(d3.drag()
           .on("drag", d => resize_sw_right(slider_elements.sliding_window, left_handle, right_handle, slider_elements.time_scale)))
-          
+
+        
 
       }) // Closing the IPs json
 
