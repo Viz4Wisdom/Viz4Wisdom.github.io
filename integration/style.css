@@ -195,4 +195,8 @@ figure *{
 	margin-right:15%;
 	text-align:justify;
 }
+	
+figure *{
+	width:100%
+	}
 
