@@ -179,3 +179,8 @@ footer{
 	display:block;
 	margin-left:auto;
 }
+
+#presentation_projet *{
+	padding:0.1em
+}
+
