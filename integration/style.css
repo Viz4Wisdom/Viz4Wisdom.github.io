@@ -131,15 +131,16 @@ div.tooltip {
 	background-color : white;
 	border : 4px solid black;
 	display: block;
+	width:70%;
 }
 
 #main_viz {
 	display:flex;
+	justify-content:center;
 }
 
 #global_container svg {
 	display: block;
-	width:65%
 }
 
 #presentations_container {
