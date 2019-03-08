@@ -1,3 +1,6 @@
+
+var fixed_sessions = ["leisure", "administrative", "work"];
+
 // Helper functions
 function set_svg_size(svg_elem, c_width, c_height) {
 	// Takes sizes as an input, and returns the two sizes
@@ -160,26 +163,28 @@ function drawStreams(elem, it_packets, path_obj, base_beta, line_obj, gaussian_g
 		.attr("style", function (d) {
 			res = ""
 			if (sessions.indexOf(d.Session) > -1 && new Date(d.Time) > time_scale.invert(sw_begin) && new Date(d.Time) < time_scale.invert(sw_end))
+			{
 				alpha = 0.2
-			else {
-				alpha = 0; res = "display: none;"
+
+				color = "rgba(0, 153, 204, " + alpha + ")"
+				if (mode == "up_down") {
+					if (d.mode == "sender")
+						color = "rgba(102, 153, 0, " + alpha + ")"
+					else if (d.mode == "receiver")
+						color = "rgba(204, 51, 0, " + alpha + ")"
+				} else if (mode == "session") {
+					color_dict = d3.rgb(color_scale(fixed_sessions.indexOf(d.Session) + 1))
+					color = "rgba(" + color_dict.r + ", " + color_dict.g + ", " + color_dict.b + ", " + alpha + ")"
+				}
+				
+				color = "stroke :" + color + ";"
+
+
+				return res + color
+			} else {
+				return "display: none;"
 			}
 
-			color = "rgba(0, 153, 204, " + alpha + ")"
-			if (mode == "up_down") {
-				if (d.mode == "sender")
-					color = "rgba(102, 153, 0, " + alpha + ")"
-				else if (d.mode == "receiver")
-					color = "rgba(204, 51, 0, " + alpha + ")"
-			} else if (mode == "session") {
-				color_dict = d3.rgb(color_scale(sessions.indexOf(d.Session) + 1))
-				color = "rgba(" + color_dict.r + ", " + color_dict.g + ", " + color_dict.b + ", " + alpha + ")"
-			}
-
-			color = "stroke :" + color + ";"
-
-
-			return res + color
 		})
 		.attr("path", path_obj)
 		.on('mousemove', function (d) {
