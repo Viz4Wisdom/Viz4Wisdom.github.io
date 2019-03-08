@@ -177,6 +177,9 @@ footer{
 	right:0;
 }
 
+figure *{
+	width:100%
+
 .logo_ecl{
 	display:block;
 	margin-right:15%;
