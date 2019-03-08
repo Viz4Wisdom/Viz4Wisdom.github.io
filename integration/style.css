@@ -119,6 +119,10 @@ div.tooltip {
 	border : 4px solid black;
 }
 
+.presentation {
+	width:25%
+}
+
 #global_container {
 	background-color : white;
 	border : 4px solid black;
@@ -136,4 +140,13 @@ div.tooltip {
 #presentations_container {
 	display: flex;
 	justify-content : space-around;
+}
+
+.presentation {
+	width:30%
+}
+
+.presentation p,.presentation q{
+	display:block;
+	text-align:center;
 }
