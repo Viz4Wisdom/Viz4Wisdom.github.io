@@ -116,11 +116,12 @@ div.tooltip {
 }
 
 
-#main_viz div {
+#main_viz>div {
 	margin: 1em 0em;
 	padding: 0.5em;
 	border : 4px solid black;
 }
+	
 
 .presentation {
 	width:25%
