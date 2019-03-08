@@ -149,7 +149,8 @@ div.tooltip {
 	width:30%
 }
 
-.presentation p,.presentation q{
+.presentation p,.presentation q,.presentation h2{
+	padding:0.5em;
 	display:block;
 	text-align:center;
 }
