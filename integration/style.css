@@ -162,3 +162,14 @@ div.tooltip {
 	margin-left:auto;
 	margin-right:auto;
 }
+
+footer{
+	display:block;
+	position:absolute;
+	bottom:0px;
+}
+
+.logo_ecl{
+	display:block;
+	margin-left:auto;
+}
