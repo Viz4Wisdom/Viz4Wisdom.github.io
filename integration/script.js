@@ -339,12 +339,14 @@ function gaussian_generator() {
 
 function updateSessions(){
 	var checkboxes = document.getElementsByName("session")
-	sessions = []
+	sessions_inner = []
 	checkboxes.forEach(checkbox => {
 		if (checkbox.checked === true){
-			sessions.push(checkbox.value)
+			sessions_inner.push(checkbox.value)
 		}
 	})
+
+	sessions = sessions_inner
 	console.log(sessions)
 	drawStreams(svg, packets_iterator_global, path, base_beta, line_obj, gaussian_generator, mode, sessions, time_scale)
 
@@ -421,10 +423,6 @@ d3.json("world_topography_50.json", function (geojson_elem) {
 		.x(d => d.x)
 		.y(d => d.y)
 		.curve(d3.curveBundle.beta(0.5))
-
-	
-
-	var sessions = ["work", "administrative", "leisure"]
 
 	var sl_begin_x = 0, sl_begin_y = new_dims['height']
 
