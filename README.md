@@ -1,5 +1,5 @@
 # Viz4Wisdom
-Data Visualisation to grasp the where our data streams are channeled depending on the services we used
+Data Visualisation to grasp the where our data streams are channeled depending on the services we used.
 
 # First exploratory analysis
 You can find the data anlaysis conducted on the first data collected here :
@@ -15,3 +15,7 @@ The raw data used for the first analysis can be found in the `first_analysis` fo
 
 The design sheets can be found at the root of the project under the name `Viz4Wisdom_DesignSheets.pdf`
 
+# Final approach
+In the end, we decided to devide or analysis in three sessions : work, leisure, administrative. During each of them, we browsed only on websites that are related to the session. For instance, during the leisure session, we used platforms such as Youtube, Netflix, Facebook, Twitter, Reddit... The administrative session was focused on French administrative platforms for ministries, healthcare, political parties, energy suppliers. The work session is based on a software engineering student activity whois working on a website project visiting websites such as stackoverflow, language documentations, cloud platforms or overleaf.
+
+To reduce the amount of data displayed and improve the performance, we decided to aggregate the packets every 60 seconds.
