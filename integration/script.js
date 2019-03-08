@@ -1,7 +1,7 @@
 
-var fixed_sessions = ["leisure", "administrative", "work"];
-var sessions = ["leisure", "administrative", "work"];
-var sl_begin_x = 0, sl_begin_y = 0;
+var fixed_sessions = ["leisure", "work", "administrative"];
+var sessions = ["leisure", "work", "administrative"];
+var sl_begin_x = 0, sl_begin_y =0;
 
 // Helper functions
 function set_svg_size(svg_elem, c_width, c_height) {
@@ -305,7 +305,7 @@ function plot_slider_bars(elem, packets, mode, sessions, time_scale, values_up_s
 					res = "rgba(204, 51, 0, " + alpha + ")"
 
 			} else if (mode == "session") {
-				color_dict = d3.rgb(color_scale(sessions.indexOf(d.Session) + 1))
+				color_dict = d3.rgb(color_scale(fixed_sessions.indexOf(d.Session) + 1))
 				res = "rgba(" + color_dict.r + ", " + color_dict.g + ", " + color_dict.b + ", " + alpha + ")"
 			}
 
