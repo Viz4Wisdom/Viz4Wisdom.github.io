@@ -128,3 +128,7 @@ main div {
 main{
 	display:flex;
 }
+
+#global_container svg {
+	display: block;
+}
