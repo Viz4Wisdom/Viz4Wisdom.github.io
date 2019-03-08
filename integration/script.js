@@ -118,8 +118,6 @@ function drawing_box_init(svg_elem) {
 		rect_x = d3.event.x
 		rect_y = d3.event.y
 
-		console.log(svg_elem)
-
 		svg_elem.selectAll("rect").append("rect")
 			.attr("id", "geo_window")
 			.attr("x", rect_x)
@@ -127,7 +125,6 @@ function drawing_box_init(svg_elem) {
 			.attr("width", 0)
 			.attr("height", 0)
 
-		console.log(rect_x, rect_y)
 	}
 }
 
@@ -140,7 +137,6 @@ function drawing_box_drag() {
 			.attr("width", width)
 			.attr("height", height)
 
-		console.log(width, height)
 	}
 
 }
@@ -149,8 +145,6 @@ function drawStreams(elem, it_packets, path_obj, base_beta, line_obj, gaussian_g
 
 	var streams_tooltip = global_cont.append('div')
 		.attr('class', 'hidden tooltip');
-
-	console.log(sw_begin, time_scale.invert(sw_begin))
 
 	test = elem.select("#streams")
 	test.remove()
@@ -264,7 +258,7 @@ function plot_slider_bars(elem, packets, mode, sessions, time_scale, values_up_s
 
 	time_formatter = d3.timeFormat("%Y %b, %e - %H:%M:%S")
 	color_scale = d3.scaleOrdinal(d3.schemeCategory10)
-	console.log(time_scale.domain(), time_scale(new Date(2019, 2, 6, 23, 0, 0, 0)))
+	
 	elem.selectAll(".packet").remove()
 
 	elem.selectAll("rect")
@@ -347,7 +341,6 @@ function updateSessions(){
 	})
 
 	sessions = sessions_inner
-	console.log(sessions)
 	drawStreams(svg, packets_iterator_global, path, base_beta, line_obj, gaussian_generator, mode, sessions, time_scale)
 
 }
@@ -359,7 +352,7 @@ function updateMode(){
 			mode = radioButton.value
 		}
 	})
-	console.log("Mode = " + mode)
+	
 	drawStreams(svg, packets_iterator_global, path, base_beta, line_obj, gaussian_generator, mode, sessions, time_scale)
 	plot_slider_bars(slider, packets_iterator_global, mode, sessions, slider_elements.time_scale,
 		slider_elements.values_up_scale, slider_elements.values_down_scale, slider_elements.tooltip, slider_elements.height, slider_elements.vertical_padding, sl_begin_x, sl_begin_y)
@@ -546,11 +539,6 @@ d3.json("world_topography_50.json", function (geojson_elem) {
 			drawStreams(svg, packets_iterator, path, base_beta, line_obj, gaussian_generator, mode, sessions, time_scale)
 
 			svg.call(zoom_bh);
-
-
-
-
-			ended = function () { console.log("test"); drawStreams(svg, packets_iterator, path, base_beta, line_obj, gaussian_generator, mode, sessions, time_scale) }
 
 			slider_elements.sliding_window.call(d3.drag()
 				.on("drag", d => update_sw_pos(slider_elements.sliding_window, left_handle, right_handle, slider_elements.time_scale)))
