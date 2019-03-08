@@ -1,5 +1,7 @@
 
 var fixed_sessions = ["leisure", "administrative", "work"];
+var sessions = ["leisure", "administrative", "work"];
+var sl_begin_x = 0, sl_begin_y = 0;
 
 // Helper functions
 function set_svg_size(svg_elem, c_width, c_height) {
@@ -357,6 +359,9 @@ function updateMode(){
 	})
 	console.log("Mode = " + mode)
 	drawStreams(svg, packets_iterator_global, path, base_beta, line_obj, gaussian_generator, mode, sessions, time_scale)
+	plot_slider_bars(slider, packets_iterator_global, mode, sessions, slider_elements.time_scale,
+		slider_elements.values_up_scale, slider_elements.values_down_scale, slider_elements.tooltip, slider_elements.height, slider_elements.vertical_padding, sl_begin_x, sl_begin_y)
+
 }
 
 // ****************************
