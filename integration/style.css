@@ -10,9 +10,12 @@ body {
 }
 
 .photo{
+	display:block;
 	border-radius:50%;
 	width: 10em;
 	height: 10em;
+	margin-left:auto;
+	margin-right:auto;
 
 }
 
